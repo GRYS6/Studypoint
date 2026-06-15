@@ -3,31 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HTML Tutoial</title>
+    <title>CSS Tutoial</title>
     <link rel="stylesheet" href="project.css">
+ <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
+
 <body>
-   <div class="topic-menu" onclick="toggleTopicMenu()"> ☰ </div>
-        <div class="subject-page">
+
+    <div class="topic-menu" onclick="toggleTopicMenu()">☰</div>
+
+    <div class="subject-page">
+
+        <!-- Sidebar -->
         <div class="s-sidebar">
+
             <h2>CSS TOPICS</h2>
-            <a href="#">Introduction</a>
-            <a href="#">Selectors</a>
-             <a href="#">Box Model</a>
-             <a href="#">Flexbox</a>
-              <a href="#">CSS Grid</a>
-               </div>
-          <!-- Content -->
-    <div class="s-content">
 
-      <h1>CSS Introduction</h1>
+            <div id="topic-list">
+                Loading topics...
+            </div>
 
-      <p>
-       CSS is a Cascading style sheet
-      </p>
+        </div>
+
+        <!-- Content -->
+        <div class="s-content" id="main-content">
+
+            <h1>Loading...</h1>
+
+        </div>
+
     </div>
-   
-      </div>
+
     <script src="project.js"></script>
+
+    <script>
+
+
+        const API_BASE = "https://api-callstudy.onrender.com/api/view";
+
+        async function loadTopics() {
+
+            try {
+
+                const response = await fetch(`${API_BASE}/css`);
+                const data = await response.json();
+
+                console.log("API Response:", data);
+
+                const topicList = document.getElementById("topic-list");
+
+                topicList.innerHTML = "";
+
+                const notes = data.notes || [];
+
+                notes.forEach(note => {
+
+                    const link = document.createElement("a");
+
+                    link.href = "#";
+                    link.textContent = note.title || "Untitled";
+
+                    link.onclick = function(e) {
+
+    e.preventDefault();
+
+    // Purani active class hatao
+    document.querySelectorAll("#topic-list a").forEach(a => {
+        a.classList.remove("active");
+    });
+
+    // Current topic active karo
+    this.classList.add("active");
+
+    document.getElementById("main-content").innerHTML =
+    `
+    <div class="content-card">
+        <h1>${note.title || ""}</h1>
+        <div class="note-content">
+            ${note.content || note.summary || "Content not found"}
+        </div>
+    </div>
+    `;
+};
+
+                    topicList.appendChild(link);
+                });
+
+                if (notes.length > 0) {
+
+                    document.getElementById("main-content").innerHTML =
+                        `
+<div class="content-card">
+    <h1>${notes[0].title || ""}</h1>
+    <div class="note-content">
+        ${notes[0].content || notes[0].summary || "Content not found"}
+    </div>
+</div>
+`;
+                }
+
+            } catch (error) {
+
+                console.error(error);
+
+                document.getElementById("main-content").innerHTML =
+                    `<h2>Error</h2><p>${error.message}</p>`;
+            }
+        }
+
+        loadTopics();
+    </script>
+
 </body>
+
 </html>
