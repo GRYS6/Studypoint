@@ -56,3 +56,126 @@ function toggleTopicMenu(){
 
   sidebar.classList.toggle("active");
 }
+
+
+/*============subjectQuiz JS=========*/
+const params = new URLSearchParams(window.location.search);
+const subject = params.get("subject");
+
+document.getElementById("quizTitle").innerText =
+subject.toUpperCase() + " Quiz";
+
+// Sample Questions
+const quizData = [
+{
+    question: "What does DBMS stand for?",
+    options: [
+        "Database Management System",
+        "Data Backup Management System",
+        "Database Main System",
+        "Digital Base Management System"
+    ],
+    answer: 0
+},
+{
+    question: "Which language is used in DBMS?",
+    options: [
+        "SQL",
+        "HTML",
+        "CSS",
+        "XML"
+    ],
+    answer: 0
+},
+{
+    question: "Which key uniquely identifies a record?",
+    options: [
+        "Foreign Key",
+        "Primary Key",
+        "Candidate Key",
+        "Super Key"
+    ],
+    answer: 1
+}
+];
+
+let currentQuestion = 0;
+let score = 0;
+
+const questionEl = document.getElementById("question");
+const optionsEl = document.querySelector(".options");
+const nextBtn = document.querySelector(".next-btn");
+
+function loadQuestion(){
+  document.getElementById("questionNumber").innerText =
+    `Question ${currentQuestion + 1} of ${quizData.length}`;
+
+    const q = quizData[currentQuestion];
+
+    questionEl.innerText = q.question;
+
+    optionsEl.innerHTML = "";
+
+    q.options.forEach((option,index)=>{
+
+        const btn = document.createElement("button");
+
+        btn.classList.add("option");
+
+        btn.innerText = option;
+
+        btn.onclick = ()=>selectAnswer(index);
+
+        optionsEl.appendChild(btn);
+    });
+}
+
+function selectAnswer(selected){
+
+    const correct = quizData[currentQuestion].answer;
+
+    const buttons = document.querySelectorAll(".option");
+
+    buttons.forEach(btn => btn.disabled = true);
+
+    if(selected === correct){
+        score++;
+        buttons[selected].style.background = "green";
+        buttons[selected].style.color = "white";
+    }
+    else{
+        buttons[selected].style.background = "red";
+        buttons[selected].style.color = "white";
+
+        buttons[correct].style.background = "green";
+        buttons[correct].style.color = "white";
+    }
+}
+
+nextBtn.addEventListener("click",()=>{
+
+    currentQuestion++;
+
+    if(currentQuestion < quizData.length){
+
+        loadQuestion();
+
+    }else{
+
+      const percentage = Math.round((score / quizData.length) * 100);
+
+document.querySelector(".question-box").innerHTML = `
+<h2>Quiz Completed 🎉</h2>
+
+<h3>Score: ${score}/${quizData.length}</h3>
+
+<h3>Percentage: ${percentage}%</h3>
+
+<button onclick="location.reload()" class="next-btn">
+Restart Quiz
+</button>
+`;
+    }
+});
+
+loadQuestion();
