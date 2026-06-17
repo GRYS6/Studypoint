@@ -247,8 +247,7 @@ dsa: [
 {question:"Graph consists of?",options:["Vertices and Edges","Nodes only","Edges only","Arrays"],answer:0}
 ]
 
-};
-};
+};
 const quizData = allQuestions[subject];
 
 let currentQuestion = 0;
