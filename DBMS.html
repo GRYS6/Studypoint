@@ -40,82 +40,100 @@
     <script src="project.js"></script>
 
     <script>
+    const API_BASE = "https://api-callstudy.onrender.com/api/view";
 
+    // 1. New function to fetch and display a single note by ID
+    async function fetchAndDisplayNote(id, title) {
+        const mainContent = document.getElementById("main-content");
+        
+        // Show a loading state while fetching the detail API
+        mainContent.innerHTML = `<h1>Loading ${title}...</h1>`; 
 
-        const API_BASE = "https://api-callstudy.onrender.com/api/view";
+        try {
+            const response = await fetch(`${API_BASE}/dbms/${id}`);
+            const data = await response.json();
 
-        async function loadTopics() {
+            if (data.success && data.note) {
+                // Get the content (falling back to description just in case)
+                const rawContent = data.note.content || data.note.description || "Content not found";
+                
+                // Parse the markdown into HTML using the marked library you imported
+                const htmlContent = marked.parse(rawContent);
 
-            try {
-
-                const response = await fetch(`${API_BASE}/dbms`);
-                const data = await response.json();
-
-                console.log("API Response:", data);
-
-                const topicList = document.getElementById("topic-list");
-
-                topicList.innerHTML = "";
-
-                const notes = data.notes || [];
-
-                notes.forEach(note => {
-
-                    const link = document.createElement("a");
-
-                    link.href = "#";
-                    link.textContent = note.title || "Untitled";
-
-                    link.onclick = function(e) {
-
-    e.preventDefault();
-
-    // Purani active class hatao
-    document.querySelectorAll("#topic-list a").forEach(a => {
-        a.classList.remove("active");
-    });
-
-    // Current topic active karo
-    this.classList.add("active");
-
-    document.getElementById("main-content").innerHTML =
-    `
-    <div class="content-card">
-        <h1>${note.title || ""}</h1>
-        <div class="note-content">
-            ${note.content || "Content not found"}
-        </div>
-    </div>
-    `;
-};
-
-                    topicList.appendChild(link);
-                });
-
-                if (notes.length > 0) {
-
-                    document.getElementById("main-content").innerHTML =
-                        `
-<div class="content-card">
-    <h1>${notes[0].title || ""}</h1>
-    <div class="note-content">
-        ${notes[0].content || "Content not found"}
-    </div>
-</div>
-`;
-                }
-
-            } catch (error) {
-
-                console.error(error);
-
-                document.getElementById("main-content").innerHTML =
-                    `<h2>Error</h2><p>${error.message}</p>`;
+                mainContent.innerHTML = `
+                <div class="content-card">
+                    <h1>${data.note.title || title}</h1>
+                    <div class="note-content">
+                        ${htmlContent}
+                    </div>
+                </div>
+                `;
+            } else {
+                mainContent.innerHTML = `<h2>Content not found</h2>`;
             }
+        } catch (error) {
+            console.error("Error fetching note details:", error);
+            mainContent.innerHTML = `<h2>Error</h2><p>${error.message}</p>`;
         }
+    }
 
-        loadTopics();
-    </script>
+    // 2. Updated list loading function
+    async function loadTopics() {
+        try {
+            const response = await fetch(`${API_BASE}/dbms`);
+            const data = await response.json();
+
+            console.log("API Response (List):", data);
+
+            const topicList = document.getElementById("topic-list");
+            topicList.innerHTML = "";
+
+            const notes = data.notes || [];
+
+            notes.forEach((note, index) => {
+                const link = document.createElement("a");
+                link.href = "#";
+                link.textContent = note.title || "Untitled";
+
+                // Update the click handler
+                link.onclick = function(e) {
+                    e.preventDefault();
+
+                    // Purani active class hatao
+                    document.querySelectorAll("#topic-list a").forEach(a => {
+                        a.classList.remove("active");
+                    });
+
+                    // Current topic active karo
+                    this.classList.add("active");
+
+                    // FETCH the detail content using the new function
+                    fetchAndDisplayNote(note.id, note.title);
+                };
+
+                topicList.appendChild(link);
+
+                // 3. Auto-load the first note's content when the page initially loads
+                if (index === 0) {
+                    link.classList.add("active");
+                    fetchAndDisplayNote(note.id, note.title);
+                }
+            });
+
+            if (notes.length === 0) {
+                document.getElementById("main-content").innerHTML = `<h2>No topics found.</h2>`;
+            }
+
+        } catch (error) {
+            console.error("Error fetching topics:", error);
+            document.getElementById("main-content").innerHTML = `<h2>Error</h2><p>${error.message}</p>`;
+        }
+    }
+
+    // Start the process
+    loadTopics();
+</script>
+
 
 </body>
 
