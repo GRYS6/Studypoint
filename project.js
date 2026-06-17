@@ -5,15 +5,15 @@ let isOpen = false;
 
 function openMenu() {
     let sidebar = document.getElementById("sidebar");
+
     if (isOpen) {
-        sidebar.style.left = "-250px";
+        sidebar.classList.remove("active");
         isOpen = false;
     } else {
-        sidebar.style.left = "0";
+        sidebar.classList.add("active");
         isOpen = true;
     }
 }
-
 function openLogin() {
     document.getElementById("loginPopup").style.display = "block";
 }
