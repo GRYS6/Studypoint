@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>User Profile - Studypoint</title>
+  <link rel="stylesheet" href="project.css">
+  <link rel="stylesheet" href="profileStyles.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="menu-icon" onclick="openMenu()">☰</div>
+    <a href="index.html" class="logo">Studypoint</a>
+    <div class="auth">
+      <a href="profile.html" class="login">Profile</a>
+      <button onclick="logout()" class="register">Logout</button>
+    </div>
+  </header>
+
+  <div id="sidebar" class="sidebar">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="#">Courses</a>
+    <a href="#">Tutors</a>
+    <a href="#">Contact</a>
+    <a href="quiz.html">QUIZ</a>
+  </div>
+
+  <!-- Profile Container -->
+  <div class="profile-container">
+    <div class="profile-content">
+      
+      <!-- Profile Header -->
+      <div class="profile-header">
+        <div class="profile-avatar" id="userAvatar">👤</div>
+        <div class="profile-name" id="userName">John Doe</div>
+        <div class="profile-email" id="userEmail">john.doe@example.com</div>
+        <div class="profile-badge" id="userBadge">Active Learner</div>
+      </div>
+
+      <!-- Tabs Navigation -->
+      <div class="profile-tabs">
+        <button class="tab-btn active" onclick="switchTab('overview')">Overview</button>
+        <button class="tab-btn" onclick="switchTab('progress')">Progress</button>
+        <button class="tab-btn" onclick="switchTab('certificates')">Certificates</button>
+        <button class="tab-btn" onclick="switchTab('settings')">Settings</button>
+      </div>
+
+      <!-- Overview Tab -->
+      <div id="overview" class="tab-content active">
+        <!-- Personal Information Section -->
+        <div class="profile-section">
+          <h2>Personal Information</h2>
+          <div class="info-row">
+            <div class="info-label">Full Name</div>
+            <div class="info-value" id="fullName">John Doe</div>
+          </div>
+          <div class="info-row">
+            <div class="info-label">Email</div>
+            <div class="info-value" id="email">john.doe@example.com</div>
+          </div>
+          <div class="info-row">
+            <div class="info-label">Phone</div>
+            <div class="info-value" id="phone">+1 (555) 123-4567</div>
+          </div>
+          <div class="info-row">
+            <div class="info-label">Joined Date</div>
+            <div class="info-value" id="joinedDate">April 15, 2024</div>
+          </div>
+          <div class="info-row">
+            <div class="info-label">Member Status</div>
+            <div class="info-value"><span class="status-badge premium">Premium Member</span></div>
+          </div>
+          <button class="edit-btn" onclick="openEditModal()">Edit Profile</button>
+        </div>
+
+        <!-- Quick Statistics -->
+        <div class="profile-section">
+          <h2>Quick Statistics</h2>
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-number" id="totalCourses">6</div>
+              <div class="stat-label">Courses Enrolled</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number" id="lessonsCompleted">24</div>
+              <div class="stat-label">Lessons Completed</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number" id="quizzesTaken">18</div>
+              <div class="stat-label">Quizzes Taken</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number" id="averageScore">85%</div>
+              <div class="stat-label">Average Score</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="profile-section">
+          <h2>Recent Activity</h2>
+          <div class="activity-timeline" id="activityTimeline">
+            <!-- Activity items will be populated here -->
+          </div>
+        </div>
+
+        <!-- Achievements Section -->
+        <div class="profile-section">
+          <h2>Achievements & Badges</h2>
+          <div class="achievement-grid" id="achievementsGrid">
+            <!-- Achievements will be populated here -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Progress Tab -->
+      <div id="progress" class="tab-content">
+        <div class="profile-section">
+          <h2>Learning Progress</h2>
+          <div class="subject-progress" id="subjectProgressContainer">
+            <!-- Subject progress will be populated here -->
+          </div>
+        </div>
+
+        <div class="profile-section">
+          <h2>Course List</h2>
+          <ul class="course-list" id="courseList">
+            <!-- Course list will be populated here -->
+          </ul>
+        </div>
+      </div>
+
+      <!-- Certificates Tab -->
+      <div id="certificates" class="tab-content">
+        <div class="profile-section">
+          <h2>My Certificates</h2>
+          <div class="certificate-container" id="certificateContainer">
+            <!-- Certificates will be populated here -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Settings Tab -->
+      <div id="settings" class="tab-content">
+        <div class="profile-section">
+          <h2>Account Settings</h2>
+          <div class="settings-group">
+            <h3>Notifications</h3>
+            <div class="setting-item">
+              <div class="setting-label">Email Notifications</div>
+              <div class="toggle-switch active" onclick="toggleSetting(this, 'emailNotif')">
+                <div class="toggle-slider"></div>
+              </div>
+            </div>
+            <div class="setting-item">
+              <div class="setting-label">Course Updates</div>
+              <div class="toggle-switch active" onclick="toggleSetting(this, 'courseUpdates')">
+                <div class="toggle-slider"></div>
+              </div>
+            </div>
+            <div class="setting-item">
+              <div class="setting-label">Weekly Summary</div>
+              <div class="toggle-switch" onclick="toggleSetting(this, 'weeklySummary')">
+                <div class="toggle-slider"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="settings-group">
+            <h3>Privacy</h3>
+            <div class="setting-item">
+              <div class="setting-label">Public Profile</div>
+              <div class="toggle-switch active" onclick="toggleSetting(this, 'publicProfile')">
+                <div class="toggle-slider"></div>
+              </div>
+            </div>
+            <div class="setting-item">
+              <div class="setting-label">Show Achievements</div>
+              <div class="toggle-switch active" onclick="toggleSetting(this, 'showAchievements')">
+                <div class="toggle-slider"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="settings-group">
+            <h3>Preferences</h3>
+            <div class="setting-item">
+              <div class="setting-label">Dark Mode</div>
+              <div class="toggle-switch" onclick="toggleDarkMode(this)">
+                <div class="toggle-slider"></div>
+              </div>
+            </div>
+            <div class="setting-item">
+              <div class="setting-label">Auto-Play Videos</div>
+              <div class="toggle-switch active" onclick="toggleSetting(this, 'autoPlayVideos')">
+                <div class="toggle-slider"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="profile-section">
+          <h2>Danger Zone</h2>
+          <div class="danger-buttons">
+            <button class="danger-btn" onclick="resetProgress()">Reset Progress</button>
+            <button class="danger-btn delete-btn" onclick="deleteAccount()">Delete Account</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Edit Profile Modal -->
+  <div id="editModal" class="modal">
+    <div class="modal-content">
+      <span class="modal-close" onclick="closeEditModal()">&times;</span>
+      <h2>Edit Profile</h2>
+      <form onsubmit="saveProfile(event)">
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" id="editName" required>
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="editEmail" required>
+        </div>
+        <div class="form-group">
+          <label>Phone</label>
+          <input type="tel" id="editPhone">
+        </div>
+        <div class="form-group">
+          <label>Avatar Emoji</label>
+          <input type="text" id="editAvatar" maxlength="2">
+        </div>
+        <div class="form-buttons">
+          <button type="submit" class="save-btn">Save Changes</button>
+          <button type="button" class="cancel-btn" onclick="closeEditModal()">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="project.js"></script>
+  <script src="profileScript.js"></script>
+</body>
+</html>
