@@ -68,38 +68,122 @@ document.getElementById("quizTitle").innerText =
 subject.toUpperCase() + " Quiz";
 
 // Sample Questions
-const quizData = [
+const allQuestions = {
+   dbms: [
+
 {
-    question: "What does DBMS stand for?",
-    options: [
-        "Database Management System",
-        "Data Backup Management System",
-        "Database Main System",
-        "Digital Base Management System"
-    ],
-    answer: 0
+question: "What does DBMS stand for?",
+options: [
+"Database Management System",
+"Data Backup Management System",
+"Database Main System",
+"Data Management Service"
+],
+answer: 0
 },
+
 {
-    question: "Which language is used in DBMS?",
-    options: [
-        "SQL",
-        "HTML",
-        "CSS",
-        "XML"
-    ],
-    answer: 0
+question: "Which language is used to interact with databases?",
+options: [
+"HTML",
+"SQL",
+"CSS",
+"XML"
+],
+answer: 1
 },
+
 {
-    question: "Which key uniquely identifies a record?",
-    options: [
-        "Foreign Key",
-        "Primary Key",
-        "Candidate Key",
-        "Super Key"
-    ],
-    answer: 1
+question: "Which key uniquely identifies a record?",
+options: [
+"Foreign Key",
+"Primary Key",
+"Candidate Key",
+"Composite Key"
+],
+answer: 1
+},
+
+{
+question: "A table row is called?",
+options: [
+"Attribute",
+"Field",
+"Record",
+"Column"
+],
+answer: 2
+},
+
+{
+question: "Which normal form removes partial dependency?",
+options: [
+"1NF",
+"2NF",
+"3NF",
+"BCNF"
+],
+answer: 1
+},
+
+{
+question: "Which key links two tables?",
+options: [
+"Primary Key",
+"Foreign Key",
+"Super Key",
+"Candidate Key"
+],
+answer: 1
+},
+
+{
+question: "DBMS helps reduce?",
+options: [
+"Redundancy",
+"Security",
+"Storage",
+"Tables"
+],
+answer: 0
+},
+
+{
+question: "SQL stands for?",
+options: [
+"Structured Query Language",
+"System Query Language",
+"Simple Query Language",
+"Sequential Query Language"
+],
+answer: 0
+},
+
+{
+question: "Which command is used to retrieve data?",
+options: [
+"INSERT",
+"DELETE",
+"SELECT",
+"UPDATE"
+],
+answer: 2
+},
+
+{
+question: "ER Model stands for?",
+options: [
+"Entity Relationship Model",
+"Entry Relation Model",
+"Entity Record Model",
+"Extended Relation Model"
+],
+answer: 0
 }
-];
+
+]
+};
+const quizData = allQuestions[subject];
 
 let currentQuestion = 0;
 let score = 0;
