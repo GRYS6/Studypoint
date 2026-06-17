@@ -83,7 +83,7 @@
     <div class="content-card">
         <h1>${note.title || ""}</h1>
         <div class="note-content">
-            ${note.content || note.summary || "Content not found"}
+            ${note.content || "Content not found"}
         </div>
     </div>
     `;
@@ -99,7 +99,7 @@
 <div class="content-card">
     <h1>${notes[0].title || ""}</h1>
     <div class="note-content">
-        ${notes[0].content || notes[0].summary || "Content not found"}
+        ${notes[0].content || "Content not found"}
     </div>
 </div>
 `;
