@@ -77,7 +77,7 @@
     // 2. Updated list loading function
     async function loadTopics() {
         try {
-            const response = await fetch(`${API_BASE}/dbms`);
+            const response = await fetch(`${API_BASE}/os`);
             const data = await response.json();
 
             console.log("API Response (List):", data);
