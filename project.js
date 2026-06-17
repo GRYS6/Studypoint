@@ -51,11 +51,13 @@ function moveSlider(direction) {
     track.style.transform = `translateX(${currentPosition}px)`;
 }
 function toggleTopicMenu(){
-
   let sidebar = document.querySelector(".s-sidebar");
+  let content = document.querySelector(".s-content"); // Grab the content area
 
   sidebar.classList.toggle("active");
+  content.classList.toggle("active"); // Toggle active class on content too
 }
+
 
 
 /*============subjectQuiz JS=========*/
