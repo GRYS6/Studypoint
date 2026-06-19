@@ -128,9 +128,7 @@ if (subject && document.getElementById("quizTitle")) {
 <br>
 
 <centre><a href="https://gemini.google.com" target="_blank" onclick="copyPrompt()">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Google_Gemini_logo.svg" 
-         alt="Gemini" 
-         style="width: 50px; height: 50px; cursor: pointer; border-radius: 8px;">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Google_Gemini_logo.svg"alt="Gemini"style="width: 50px; height: 50px; cursor: pointer; border-radius: 8px;">
 </a>
 
 <script>
