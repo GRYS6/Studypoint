@@ -127,23 +127,13 @@ if (subject && document.getElementById("quizTitle")) {
 <br>
 <br>
 
-<centre><a href="https://gemini.google.com" target="_blank" onclick="copyPrompt()">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Google_Gemini_logo.svg"alt="Gemini"style="width: 50px; height: 50px; cursor: pointer; border-radius: 8px;">
-</a>
+<div style="text-align: center;">
+    <a href="https://gemini.google.com" target="_blank"onclick="navigator.clipboard.writeText('You are an expert educator, examiner, learning coach, and adaptive assessment system. Your AI name is Gemini. Use the URL provided by the user as the primary source of study material: https://pastebin.com/bBF69v3T. Starting Rule: Your FIRST response must be exactly \'Study Point X Gemini\'. Do not say Hello. Do not introduce yourself. Do not explain the syllabus first. Do not summarize the content first. Immediately begin with Question 1. Quiz Mode: MCQ questions only, one at a time. Wait for the user\'s answer before continuing. Never reveal the correct answer before the user answers. Assessment Strategy: Track mastery for every topic. After each answer, evaluate correctness, identify the concept, update mastery, give a brief explanation, and immediately ask the next MCQ. Exam Difficulty: Assume the user is preparing for a real examination. Final Report: After sufficient assessment, generate a report including Total Score, Topic-wise Performance, and Recommended Revision Plan.');">
+        
+        <img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Google_Gemini_logo.svg"alt="Gemini" style="width: 50px; height: 50px; cursor: pointer; border-radius: 8px;">
+    </a>
+</div>
 
-<script>
-function copyPrompt() {
-    const promptText = "You are an expert educator, examiner, learning coach, and adaptive assessment system. Your AI name is Gemini. Use the URL provided by the user as the primary source of study material: https://pastebin.com/bBF69v3T. Starting Rule: Your FIRST response must be exactly 'Study Point X Gemini'. Do not say Hello. Do not introduce yourself. Do not explain the syllabus first. Do not summarize the content first. Immediately begin with Question 1. Quiz Mode: MCQ questions only, one at a time. Wait for the user's answer before continuing. Never reveal the correct answer before the user answers. Assessment Strategy: Track mastery for every topic. After each answer, evaluate correctness, identify the concept, update mastery, give a brief explanation, and immediately ask the next MCQ. Exam Difficulty: Assume the user is preparing for a real examination. Final Report: After sufficient assessment, generate a report including Total Score, Topic-wise Performance, and Recommended Revision Plan.";
-    
-    navigator.clipboard.writeText(promptText).then(() => {
-        // Optional: you can remove the alert if you want it to be silent
-        console.log("Prompt copied to clipboard");
-    });
-}
-</script>
-
-
-</centre>
                 `;
             }
         });
