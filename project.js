@@ -139,13 +139,6 @@ function copyAndOpen() {
 <br>
 <br>
 
-<div style="text-align: center;">
-    <a href="https://gemini.google.com" target="_blank"onclick="copyAndOpen()">
-        
-        <img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Google_Gemini_logo.svg"alt="Gemini" style="width: 50px; height: 50px; cursor: pointer; border-radius: 8px;">
-    </a>
-</div>
-
                 `;
             }
         });
