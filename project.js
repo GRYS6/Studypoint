@@ -77,6 +77,18 @@ if (subject && document.getElementById("quizTitle")) {
         const optionsEl = document.querySelector(".options");
         const nextBtn = document.querySelector(".next-btn");
 
+function copyAndOpen() {
+    const promptText = "You are an expert educator, examiner, learning coach, and adaptive assessment system. Your AI name is Gemini. Use the URL provided by the user as the primary source of study material: https://pastebin.com/bBF69v3T. Starting Rule: Your FIRST response must be exactly 'Study Point X Gemini'. Do not say Hello. Do not introduce yourself. Do not explain the syllabus first. Do not summarize the content first. Immediately begin with Question 1. Quiz Mode: MCQ questions only, one at a time. Wait for the user's answer before continuing. Never reveal the correct answer before the user answers. Assessment Strategy: Track mastery for every topic. After each answer, evaluate correctness, identify the concept, update mastery, give a brief explanation, and immediately ask the next MCQ. Exam Difficulty: Assume the user is preparing for a real examination. Final Report: After sufficient assessment, generate a report including Total Score, Topic-wise Performance, and Recommended Revision Plan.";
+    
+    // 1. Copy to clipboard
+    navigator.clipboard.writeText(promptText).then(() => {
+        // 2. Open Gemini in a new tab
+        window.open('https://gemini.google.com', '_blank');
+    }).catch(err => {
+        alert("Permission denied. Please tap the button again or ensure clipboard access is allowed.");
+    });
+}
+
         function loadQuestion(){
             document.getElementById("questionNumber").innerText = 
                 `Question ${currentQuestion + 1} of ${quizData.length}`;
@@ -128,7 +140,7 @@ if (subject && document.getElementById("quizTitle")) {
 <br>
 
 <div style="text-align: center;">
-    <a href="https://gemini.google.com" target="_blank"onclick="navigator.clipboard.writeText('You are an expert educator, examiner, learning coach, and adaptive assessment system. Your AI name is Gemini. Use the URL provided by the user as the primary source of study material: https://pastebin.com/bBF69v3T. Starting Rule: Your FIRST response must be exactly \'Study Point X Gemini\'. Do not say Hello. Do not introduce yourself. Do not explain the syllabus first. Do not summarize the content first. Immediately begin with Question 1. Quiz Mode: MCQ questions only, one at a time. Wait for the user\'s answer before continuing. Never reveal the correct answer before the user answers. Assessment Strategy: Track mastery for every topic. After each answer, evaluate correctness, identify the concept, update mastery, give a brief explanation, and immediately ask the next MCQ. Exam Difficulty: Assume the user is preparing for a real examination. Final Report: After sufficient assessment, generate a report including Total Score, Topic-wise Performance, and Recommended Revision Plan.');">
+    <a href="https://gemini.google.com" target="_blank"onclick="copyAndOpen()">
         
         <img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Google_Gemini_logo.svg"alt="Gemini" style="width: 50px; height: 50px; cursor: pointer; border-radius: 8px;">
     </a>
